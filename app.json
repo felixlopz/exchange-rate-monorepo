@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "aa105b9f-39cb-4c3b-847b-f7e5bdf4ed99"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.felixlopzd.bcvexchange",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    }
+  }
+}

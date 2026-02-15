@@ -70,3 +70,5 @@ The mobile app is in prototype stage — screens have placeholder data, `src/com
 - **API is deployed** on Render at the URL in `apps/mobile/src/constants/index.ts`
 - **Environment:** API requires `.env` with `DATABASE_URL`, `PORT`, etc. — see `.env.example`
 - API tsconfig extends root tsconfig; mobile tsconfig extends `expo/tsconfig.base` (does NOT extend root)
+
+<!-- claude --resume 46c61442-4155-4179-a30d-77fd546e1773 -->
