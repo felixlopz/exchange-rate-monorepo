@@ -1,7 +1,7 @@
 import { ExchangeRate, BinanceLiveRate, ApiResponse } from "../types";
 
-// Update this with your actual API URL
-const API_URL = "http://localhost:3000/api";
+const API_URL =
+  process.env.EXPO_PUBLIC_API_URL || "http://localhost:3000/api";
 
 export const api = {
   // Get latest BCV rates
