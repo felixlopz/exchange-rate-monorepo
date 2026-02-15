@@ -1,0 +1,17 @@
+{
+  "name": "bcv-exchange",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "api:dev": "bun run --filter @bcv-exchange/api dev",
+    "api:build": "bun run --filter @bcv-exchange/api build",
+    "api:start": "bun run --filter @bcv-exchange/api start",
+    "mobile:start": "cd apps/mobile && bunx expo start --dev-client",
+    "mobile:android": "bun run --filter @bcv-exchange/mobile android",
+    "mobile:ios": "bun run --filter @bcv-exchange/mobile ios",
+    "mobile:prebuild": "bun run --filter @bcv-exchange/mobile build"
+  }
+}
