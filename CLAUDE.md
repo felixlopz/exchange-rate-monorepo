@@ -56,7 +56,7 @@ Key API endpoints: `GET /api/rates/latest`, `GET /api/rates/history`, `GET /api/
 
 - **`App.tsx`** — Root component with bottom tab navigation (Home, Charts, History)
 - **`src/services/api.ts`** — API client using fetch, points to Render deployment
-- **`src/constants/index.ts`** — Colors, currency definitions, API_CONFIG base URL
+- **`src/constants/index.ts`** — Colors, currency definitions
 - **`src/types/index.ts`** — TypeScript interfaces (ExchangeRate, BinanceLiveRate, ApiResponse)
 - Path alias: `@/*` maps to `src/*`
 - Styling: NativeWind with `globals.css` for Tailwind directives
@@ -70,5 +70,3 @@ The mobile app is in prototype stage — screens have placeholder data, `src/com
 - **API is deployed** on Render at the URL in `apps/mobile/src/constants/index.ts`
 - **Environment:** API requires `.env` with `DATABASE_URL`, `PORT`, etc. — see `.env.example`
 - API tsconfig extends root tsconfig; mobile tsconfig extends `expo/tsconfig.base` (does NOT extend root)
-
-<!-- claude --resume 46c61442-4155-4179-a30d-77fd546e1773 -->

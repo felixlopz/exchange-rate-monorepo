@@ -3,10 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import ConverterScreen from "./src/screens/ConverterScreen";
 import TrackerScreen from "./src/screens/TrackerScreen";
 import { COLORS } from "./src/constants";
+import SettingsScreen from "@/screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,20 +15,30 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <SafeAreaView className="flex-1 bg-dark-300" edges={["top"]}>
-          <StatusBar style="light" />
+        <SafeAreaView className="flex-1 bg-background" edges={["top"]}>
+          <StatusBar style="dark" />
           <Tab.Navigator
             screenOptions={{
               headerShown: false,
               tabBarStyle: {
-                backgroundColor: "#111827",
-                borderTopColor: "rgba(255,255,255,0.1)",
+                backgroundColor: COLORS.surface,
+                borderTopColor: COLORS.border,
                 borderTopWidth: 1,
               },
               tabBarActiveTintColor: COLORS.primary,
-              tabBarInactiveTintColor: "rgba(255,255,255,0.4)",
+              tabBarInactiveTintColor: COLORS.textSecondary,
             }}
           >
+            <Tab.Screen
+              name="Tracker"
+              component={TrackerScreen}
+              options={{
+                tabBarLabel: "Tracker",
+                tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="wallet" size={size} color={color} />
+                ),
+              }}
+            />
             <Tab.Screen
               name="Converter"
               component={ConverterScreen}
@@ -39,12 +50,12 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="Tracker"
-              component={TrackerScreen}
+              name="Settings"
+              component={SettingsScreen}
               options={{
-                tabBarLabel: "Tracker",
+                tabBarLabel: "Settings",
                 tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="wallet" size={size} color={color} />
+                  <FontAwesome5 name="cog" size={size} color={color} />
                 ),
               }}
             />

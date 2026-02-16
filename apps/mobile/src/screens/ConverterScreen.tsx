@@ -167,7 +167,7 @@ export default function ConverterScreen() {
 
   return (
     <ScrollView
-      className="flex-1 bg-dark-300"
+      className="flex-1 bg-background"
       contentContainerClassName="flex-grow px-5 pt-4 pb-8"
       keyboardShouldPersistTaps="handled"
       refreshControl={
@@ -179,16 +179,18 @@ export default function ConverterScreen() {
       }
     >
       {/* Header */}
-      <Text className="text-white text-2xl font-bold mb-6">BCV Exchange</Text>
+      <Text className="text-textPrimary text-2xl font-bold mb-6">
+        BCV Exchange
+      </Text>
 
       {/* Currency selector */}
-      <View className="flex-row mb-6 bg-dark-100 rounded-xl p-1">
+      <View className="flex-row mb-6 bg-border/50 rounded-xl p-1">
         <TouchableOpacity
           className={`flex-1 py-3 rounded-lg items-center ${currency === "USD" ? "bg-primary" : ""}`}
           onPress={() => setCurrency("USD")}
         >
           <Text
-            className={`text-base font-semibold ${currency === "USD" ? "text-white" : "text-white/50"}`}
+            className={`text-base font-semibold ${currency === "USD" ? "text-white" : "text-textSecondary"}`}
           >
             USD
           </Text>
@@ -198,7 +200,7 @@ export default function ConverterScreen() {
           onPress={() => setCurrency("EUR")}
         >
           <Text
-            className={`text-base font-semibold ${currency === "EUR" ? "text-white" : "text-white/50"}`}
+            className={`text-base font-semibold ${currency === "EUR" ? "text-white" : "text-textSecondary"}`}
           >
             EUR
           </Text>
@@ -228,45 +230,45 @@ export default function ConverterScreen() {
         <>
           {/* Rate display */}
           <View className="items-center mb-8">
-            <Text className="text-white/50 text-sm mb-1">
+            <Text className="text-textSecondary text-sm mb-1">
               Tasa BCV {currency}/VES
             </Text>
-            <Text className="text-white text-4xl font-bold">
+            <Text className="text-textPrimary text-4xl font-bold">
               {currentRate != null ? formatVE(currentRate) : "—"}
             </Text>
           </View>
 
           {/* Currency input */}
-          <View className="bg-dark-100 rounded-2xl p-4 mb-4">
-            <Text className="text-white/50 text-sm mb-2">{currency}</Text>
+          <View className="bg-surface rounded-2xl p-4 mb-4">
+            <Text className="text-textSecondary text-sm mb-2">{currency}</Text>
             <View className="flex-row items-center">
-              <Text className="text-white text-2xl mr-2">
+              <Text className="text-textPrimary text-2xl mr-2">
                 {currencySymbol}
               </Text>
               <TextInput
-                className="flex-1 text-white text-2xl"
+                className="flex-1 text-textPrimary text-2xl"
                 value={currencyDisplay}
                 onChangeText={handleCurrencyInput}
                 onBlur={handleCurrencyBlur}
                 placeholder="0,00"
-                placeholderTextColor="rgba(255,255,255,0.3)"
+                placeholderTextColor={COLORS.textTertiary}
                 keyboardType="decimal-pad"
               />
             </View>
           </View>
 
           {/* Bolivares input */}
-          <View className="bg-dark-100 rounded-2xl p-4">
-            <Text className="text-white/50 text-sm mb-2">VES</Text>
+          <View className="bg-surface rounded-2xl p-4">
+            <Text className="text-textSecondary text-sm mb-2">VES</Text>
             <View className="flex-row items-center">
-              <Text className="text-white text-2xl mr-2">Bs</Text>
+              <Text className="text-textPrimary text-2xl mr-2">Bs</Text>
               <TextInput
-                className="flex-1 text-white text-2xl"
+                className="flex-1 text-textPrimary text-2xl"
                 value={bolivaresDisplay}
                 onChangeText={handleBolivaresInput}
                 onBlur={handleBolivaresBlur}
                 placeholder="0,00"
-                placeholderTextColor="rgba(255,255,255,0.3)"
+                placeholderTextColor={COLORS.textTertiary}
                 keyboardType="decimal-pad"
               />
             </View>
@@ -274,32 +276,38 @@ export default function ConverterScreen() {
 
           {/* Cross-rate card */}
           {(crossRateAmount != null || crossRateReverse != null) && (
-            <View className="bg-dark-100/50 rounded-2xl p-4 mt-4 border border-white/10">
-              <Text className="text-white/50 text-sm mb-3">
+            <View
+              className="bg-surface rounded-2xl p-4 mt-4"
+              style={{ borderWidth: 1, borderColor: COLORS.border }}
+            >
+              <Text className="text-textSecondary text-sm mb-3">
                 Al cambio en {otherCurrency}
               </Text>
               {crossRateAmount != null && (
                 <View className="flex-row justify-between items-center mb-2">
-                  <Text className="text-white/70 text-base">
+                  <Text className="text-textSecondary text-base">
                     {currencySymbol} {currencyDisplay}
                   </Text>
-                  <Text className="text-white text-base font-semibold">
+                  <Text className="text-textPrimary text-base font-semibold">
                     Bs {formatVE(crossRateAmount)}
                   </Text>
                 </View>
               )}
               {crossRateReverse != null && (
                 <View className="flex-row justify-between items-center">
-                  <Text className="text-white/70 text-base">
+                  <Text className="text-textSecondary text-base">
                     Bs {bolivaresDisplay}
                   </Text>
-                  <Text className="text-white text-base font-semibold">
+                  <Text className="text-textPrimary text-base font-semibold">
                     {otherSymbol} {formatVE(crossRateReverse)}
                   </Text>
                 </View>
               )}
               {crossDiffCurrency != null && crossDiffPct != null && (
-                <View className="flex-row justify-end items-center mt-3 pt-3 border-t border-white/10">
+                <View
+                  className="flex-row justify-end items-center mt-3 pt-3"
+                  style={{ borderTopWidth: 1, borderTopColor: COLORS.border }}
+                >
                   <Text
                     className={`text-sm font-medium ${crossDiffCurrency >= 0 ? "text-success" : "text-danger"}`}
                   >
