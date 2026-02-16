@@ -66,3 +66,50 @@ export interface Transaction {
   // Legacy field for backward compatibility
   category?: ExpenseCategory | IncomeCategory;
 }
+
+// Account/Wallet Types
+export type AccountType =
+  | 'efectivo'    // Cash
+  | 'banco'       // Bank
+  | 'crédito'     // Credit
+  | 'débito'      // Debit
+  | 'ahorros'     // Savings
+  | 'inversión'   // Investment
+  | 'otro';       // Other
+
+export interface Wallet {
+  id: string;                    // UUID
+  user_id: string;               // Device user ID
+  name: string;                  // "My Savings", "Main Bank", etc.
+  account_type: AccountType;
+  currency: 'USD' | 'EUR' | 'VES';
+  initial_balance: number;
+  current_balance: number;       // Calculated from transactions
+  is_active: boolean;
+  created_at: string;            // ISO date
+  updated_at: string;
+  metadata?: {
+    color?: string;              // For visual distinction
+    icon?: string;               // Account icon name
+    notes?: string;
+  };
+}
+
+export interface WalletTransaction {
+  id: string;                    // UUID
+  wallet_id: string;             // Links to Wallet.id
+  user_id: string;
+  type: TransactionType;         // 'income' | 'expense'
+  amount: number;
+  currency: 'USD' | 'EUR' | 'VES';  // Same as wallet currency
+  category_id?: string;          // Optional, links to existing categories
+  name: string;                  // Transaction description
+  notes?: string;
+  transaction_date: string;      // ISO date
+  created_at: string;
+  metadata?: {
+    converted_amount?: number;   // Conversion to USD or VES
+    converted_currency?: string;
+    exchange_rate?: number;      // Rate used for conversion
+  };
+}

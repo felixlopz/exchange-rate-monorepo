@@ -4,14 +4,31 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { useEffect } from "react";
 import ConverterScreen from "./src/screens/ConverterScreen";
-import TrackerScreen from "./src/screens/TrackerScreen";
+import WalletsNavigator from "./src/navigation/WalletsNavigator";
 import { COLORS } from "./src/constants";
 import SettingsScreen from "@/screens/SettingsScreen";
+import { migrateToWallets } from "./src/utils/migrateToWallets";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  // Run migration on app startup
+  useEffect(() => {
+    async function runMigration() {
+      try {
+        const migrated = await migrateToWallets();
+        if (migrated) {
+          console.log('Successfully migrated transactions to wallets');
+        }
+      } catch (error) {
+        console.error('Migration failed:', error);
+      }
+    }
+    runMigration();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -30,12 +47,12 @@ export default function App() {
             }}
           >
             <Tab.Screen
-              name="Tracker"
-              component={TrackerScreen}
+              name="Wallets"
+              component={WalletsNavigator}
               options={{
-                tabBarLabel: "Tracker",
+                tabBarLabel: "Cuentas",
                 tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="wallet" size={size} color={color} />
+                  <Ionicons name="wallet-outline" size={size} color={color} />
                 ),
               }}
             />

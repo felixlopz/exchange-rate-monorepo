@@ -40,3 +40,31 @@ export const CURRENCIES = {
   USDT: { symbol: "₮", name: "Tether" },
   VES: { symbol: "Bs", name: "Bolívar" },
 };
+
+// Wallet/Account Type Labels (Spanish)
+export const ACCOUNT_TYPE_LABELS: Record<string, string> = {
+  efectivo: 'Efectivo',
+  banco: 'Banco',
+  crédito: 'Crédito',
+  débito: 'Débito',
+  ahorros: 'Ahorros',
+  inversión: 'Inversión',
+  otro: 'Otro',
+};
+
+// Wallet/Account Type Icons (Ionicons)
+export const ACCOUNT_TYPE_ICONS: Record<string, string> = {
+  efectivo: 'cash-outline',
+  banco: 'business-outline',
+  crédito: 'card-outline',
+  débito: 'card-outline',
+  ahorros: 'save-outline',
+  inversión: 'trending-up-outline',
+  otro: 'wallet-outline',
+};
+
+// Wallet colors for visual distinction
+export const WALLET_COLORS = [
+  '#3B82F6', '#10B981', '#F59E0B', '#EF4444',
+  '#8B5CF6', '#EC4899', '#14B8A6', '#F97316',
+];
