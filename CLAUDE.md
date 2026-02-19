@@ -46,7 +46,7 @@ Layered architecture: **Routes → Services → Models → Database**
 - **`services/`** — Business logic, orchestrates providers and models
 - **`providers/`** — Data source scrapers extending `BaseProvider`: `BCVProvider` (Cheerio HTML scraping), `BinanceProvider` (Binance P2P API)
 - **`models/Rate.ts`** — PostgreSQL queries (CRUD with UPSERT)
-- **`jobs/scheduler.ts`** — node-cron jobs in Caracas timezone (BCV: 9:15/13:15, Binance: 9:00/13:00/18:00)
+- **`jobs/scheduler.ts`** — node-cron jobs in Caracas timezone (BCV: 9:01/13:01, Binance: 9:00/13:00/18:00)
 - **`config/database.ts`** — pg Pool + table creation; **`config/enviroment.ts`** — env loader (note: filename typo is intentional, don't rename)
 - **`types/index.ts`** — Shared TypeScript interfaces
 

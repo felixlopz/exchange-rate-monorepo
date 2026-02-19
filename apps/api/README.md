@@ -145,8 +145,8 @@ The API automatically scrapes rates on the following schedule (Caracas timezone)
 
 **BCV (Official):**
 
-- 9:15 AM - Morning update
-- 1:15 PM - Afternoon update
+- 9:01 AM - Morning update
+- 1:01 PM - Afternoon update
 
 **Binance P2P:**
 

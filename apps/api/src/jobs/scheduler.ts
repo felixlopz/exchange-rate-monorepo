@@ -1,9 +1,9 @@
 import cron from "node-cron";
 import rateService from "../services/rateService";
 
-// BCV Jobs - 9:15 AM and 1:15 PM Caracas time
+// BCV Jobs - 9:01 AM and 1:01 PM Caracas time
 const bcvMorningJob = cron.schedule(
-  "15 9 * * *",
+  "1 9 * * *",
   async () => {
     console.log("🕐 Running BCV morning scrape job...");
     try {
@@ -19,7 +19,7 @@ const bcvMorningJob = cron.schedule(
 );
 
 const bcvAfternoonJob = cron.schedule(
-  "15 13 * * *",
+  "1 13 * * *",
   async () => {
     console.log("🕐 Running BCV afternoon scrape job...");
     try {
@@ -90,7 +90,7 @@ export const startScheduler = (): void => {
   binanceAfternoonJob.start();
   binanceEveningJob.start();
   console.log("⏰ Scheduler started:");
-  console.log("  - BCV: 9:15 AM and 1:15 PM Caracas time");
+  console.log("  - BCV: 9:01 AM and 1:01 PM Caracas time");
   console.log("  - Binance P2P: 9:00 AM, 1:00 PM, and 6:00 PM Caracas time");
 };
 
