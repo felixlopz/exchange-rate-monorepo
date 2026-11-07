@@ -9,6 +9,8 @@ router.use("/binance", binanceRouter);
 
 // Health check
 router.get("/health", (req: Request, res: Response) => {
+  // TEMP: find Railway proxy hop count for trust proxy. Remove after.
+  console.log("[proxy-debug]", JSON.stringify({ xff: req.headers["x-forwarded-for"], realIp: req.headers["x-real-ip"], ip: req.ip, ips: req.ips }));
   res.json({
     success: true,
     message: "API is running",
