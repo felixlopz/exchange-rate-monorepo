@@ -7,10 +7,11 @@ import routes from "./routes";
 
 const app: Express = express();
 
-// Railway puts one proxy in front of the app. Trust it so req.ip is the
-// visitor's IP (from X-Forwarded-For) and rate limiting is per visitor,
-// not one shared bucket for everyone.
-app.set("trust proxy", 1);
+// Railway routes requests through two proxies: the edge (adds the visitor's
+// IP to X-Forwarded-For) and an internal hop (the socket peer). Trusting
+// both makes req.ip the visitor's IP, so rate limiting is per visitor.
+// Measured 2026-11-07: XFF = "<visitor>, <edge>", socket = internal proxy.
+app.set("trust proxy", 2);
 
 // Security middleware
 app.use(helmet());
