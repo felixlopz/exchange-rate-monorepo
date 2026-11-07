@@ -62,8 +62,13 @@ export class BCVProvider extends BaseProvider {
         return null;
       }
 
-      // Remove spaces and convert comma to dot for decimal parsing
-      const cleanedRate = rateText.replace(/\s/g, "").replace(",", ".");
+      // BCV uses Venezuelan formatting: "." for thousands, "," for decimals
+      // (e.g. "1.001,23456789"). Strip thousands dots before converting the
+      // decimal comma, otherwise rates >= 1000 parse as ~1.
+      const cleanedRate = rateText
+        .replace(/\s/g, "")
+        .replace(/\./g, "")
+        .replace(",", ".");
       const rate = parseFloat(cleanedRate);
 
       if (isNaN(rate)) {
