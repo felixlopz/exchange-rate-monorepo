@@ -7,7 +7,6 @@ A REST API that tracks and provides historical exchange rates from official and 
 - 📊 **Official Rates**: BCV (Banco Central de Venezuela) - USD and EUR to VES
 - 💱 **P2P Rates**: Binance P2P marketplace - USDT to VES (buy and sell)
 - 📈 **Historical Data**: Track rate changes over time
-- ⚡ **Live Rates**: Real-time P2P rates without database queries
 - 🔄 **Auto-Updates**: Scheduled scraping at specific times
 - 🛡️ **Rate Limiting**: 100 requests per 15 minutes per IP
 - 🔒 **Secure**: Helmet.js, CORS, input validation
@@ -89,11 +88,6 @@ Body: {"provider": "BCV"}
 ### Binance P2P
 
 ```bash
-# Get live rates (real-time, not stored)
-GET /api/binance/live
-GET /api/binance/live?type=buy
-GET /api/binance/live?type=sell
-
 # Get latest stored rates
 GET /api/binance/latest
 GET /api/binance/latest?type=buy
@@ -111,32 +105,6 @@ POST /api/binance/update
 
 ```bash
 curl "http://localhost:3000/api/rates/latest?provider=BCV&currency=USD"
-```
-
-**Get live Binance P2P rates:**
-
-```bash
-curl "http://localhost:3000/api/binance/live"
-```
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "data": {
-    "buy_rate": 552.5,
-    "sell_rate": 545.8,
-    "average_rate": 549.15,
-    "spread": 6.7,
-    "spread_percentage": 1.23,
-    "calculated_at": "2024-02-08T15:30:00.000Z",
-    "sample_size": {
-      "buy": 10,
-      "sell": 10
-    }
-  }
-}
 ```
 
 ## Automatic Updates

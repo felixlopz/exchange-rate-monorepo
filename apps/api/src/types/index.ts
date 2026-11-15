@@ -53,15 +53,3 @@ export interface BinanceResponse {
   success: boolean;
 }
 
-export interface LiveRateResponse {
-  buy_rate: number | null;
-  sell_rate: number | null;
-  average_rate: number | null;
-  spread: number | null;
-  spread_percentage: number | null;
-  calculated_at: string;
-  sample_size: {
-    buy: number;
-    sell: number;
-  };
-}

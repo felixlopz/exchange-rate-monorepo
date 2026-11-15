@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from "express";
-import binanceLiveService from "../services/binanceLiveService";
 import rateService from "../services/rateService";
 
 const router = Router();
@@ -11,40 +10,6 @@ const getStringParam = (param: unknown): string | undefined => {
   if (Array.isArray(param) && param.length > 0) return param[0];
   return undefined;
 };
-
-// GET /api/binance/live - Get live Binance P2P rates (not stored)
-router.get("/live", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const type = getStringParam(req.query.type) as
-      | "buy"
-      | "sell"
-      | "average"
-      | undefined;
-
-    // Validate type parameter
-    if (type && !["buy", "sell", "average"].includes(type)) {
-      res.status(400).json({
-        success: false,
-        error: "Invalid type parameter. Must be: buy, sell, or average",
-      });
-      return;
-    }
-
-    const liveRates = await binanceLiveService.getLiveRates(type);
-
-    res.json({
-      success: true,
-      data: liveRates,
-      meta: {
-        source: "binance_p2p_live",
-        not_stored: true,
-        info: "This data is fetched in real-time and not stored in the database",
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
 
 // GET /api/binance/history - Get historical Binance rates from database
 router.get(
